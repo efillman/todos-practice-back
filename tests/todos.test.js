@@ -19,22 +19,22 @@ const request = supertest(app);
 
 beforeEach(() => initializeCityDatabase());
 
-describe('GET /users non promise', () => {
-  test('get all movies from /users', async () => {
-    const response = await request.get('/users');
+describe('GET /todos non promise', () => {
+  test('get all movies from /todos', async () => {
+    const response = await request.get('/todos');
     expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveLength(3);
+    expect(response.body).toHaveLength(6);
   });
 });
 
-describe('GET /users promise', () => {
-  test('get all users from /users', async () => {
+describe('GET /todos promise', () => {
+  test('get all users from /todos', async () => {
     await request
-      .get('/users')
+      .get('/todos')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).toHaveLength(3);
+        expect(res.body).toHaveLength(6);
       });
   });
 });

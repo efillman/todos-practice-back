@@ -1,18 +1,7 @@
-const dotenv = require('dotenv');
-const knex = require('knex');
-const knexConfig = require('../knexfile');
+const todoModel = require('../models/TodoModel');
 
-const result = dotenv.config();
-if (result.error) {
-  throw result.error;
-}
-const { parsed: envs } = result;
-const knexWorker = knex(knexConfig[envs.NODE_ENV]);
-
-exports.index = function (req, res) {
-  knexWorker
-    .select('*')
-    .from('todo')
+exports.index = (req, res) => {
+  todoModel.todoIndex()
     .then((data) => res.status(200).json(data))
     .catch((err) => {
       console.log(err);
